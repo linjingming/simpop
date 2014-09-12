@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <title>手机弹窗demo</title>
+</head>
+<body>
+<div class="demo" id="demo">
+    <p>
+        <a href="javascript:;">tip</a>
+    </p>
+    <p>
+        <a href="javascript:;">alert</a>
+        <a href="javascript:;">alert（带按钮）</a>
+    </p>
+    <p>
+        <a href="javascript:;">confirm</a>
+        <a href="javascript:;">confirm(按钮文字自定义)</a>
+    </p>
+    <p>
+        <a href="javascript:;">传入自定义html</a>
+    </p>
+    <p>
+        <a href="javascript:;">showloading</a>
+        <a href="javascript:;">hideloading</a>
+    </p>
+</div>
+<script src="simpop.js"></script>
+<script>
+    var a = document.getElementById('demo').querySelectorAll('a');
+
+    // 信息tip
+    a[0].onclick = function(){
+        Simpop({
+            content: 'hello simpop',
+            time: 2000//3秒后自动关闭
+        }).show();
+    }
+    //alert
+    a[1].onclick = function(){
+        Simpop({
+            width: 300,
+            title: '提示',
+            content: 'hello simpop hello simpop hello simpop hello simpop hello simpop hello simpop hello simpop'
+        }).show();
+    }
+    a[2].onclick = function(){
+        Simpop({
+            title: '提示',
+            content: 'hello simpop',
+            ok: function(){
+                Simpop({
+                    content: '您点击了确定',
+                    time: 1000
+                }).show();
+            }
+        }).show();
+    }
+    //confirm
+    a[3].onclick = function(){
+        Simpop({
+            title: '提示',
+            content: 'hello simpop',
+            ok: function(){
+                Simpop({
+                    content: '您点击了确定',
+                    time: 1000
+                }).show();
+            },
+            cancel: function(){
+                Simpop({
+                    content: '您点击了取消',
+                    time: 1000
+                }).show();
+            }
+        }).show();
+    }
+
+    a[4].onclick = function(){
+        Simpop({
+            title: '提示',
+            content: 'hello simpop',
+            ok: {
+                value: '正确',
+                callback: function(){
+                    Simpop({
+                        content: '您点击了正确',
+                        time: 1000
+                    }).show();
+                }
+            },
+            cancel: {
+                value: '错误',
+                callback: function(){
+                    Simpop({
+                        content: '您点击了错误',
+                        time: 1000
+                    }).show();
+                }
+            }
+        }).show();
+    }
+    //传入html
+    a[5].onclick = function(){
+        Simpop({
+            type: '1',
+            content: '<div style="width: 300px;height: 100px;background: #fff">自定义html<button style="width: 110px;height: 30px;border: 1px solid #Ccc">按钮点击关闭</button></div>'
+        }).show(function(){
+            var self = this;
+            //this.pop获取弹窗
+            var btn = this.pop.querySelector('button');
+            btn.onclick = function(){
+                self.close();
+            }
+        });
+    }
+
+    //loading
+    a[6].onclick = function(){
+        Simpop({
+            id: 'load',
+            mask: false,
+            content:'加载中.....'
+        }).showLoading();
+    }
+
+    a[7].onclick = function(){
+        Simpop.list['load'] && Simpop.list['load'].close();
+    }
+
+</script>
+</body>
+</html>
