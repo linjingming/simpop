@@ -3,7 +3,7 @@
 >原生js编写,无需依赖任何库只要加载simpop.min.js即可
 
 ### demo页面
-* [http://simpop.coding.io/](http://simpop.coding.io/)
+* [demo](http://linjingming.coding.me/simpop//)
 
 ### 简单的提示信息
 
